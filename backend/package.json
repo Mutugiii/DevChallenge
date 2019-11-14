@@ -4,8 +4,8 @@
   "description": "DevC api for challenge app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all --parallel lint",
+    "test": "mocha",
     "lint": "./node_modules/.bin/eslint index.js"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.7.0",
     "@typescript-eslint/parser": "^2.7.0",
+    "chai": "^4.2.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -32,6 +33,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "mocha": "^6.2.2",
     "prettier": "^1.19.1"
   }
 }
