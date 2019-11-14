@@ -22,7 +22,6 @@
         "no-undef": "warn",
         "no-unused-vars": "warn",
         "no-console": "warn",
-        "func-names": "off",
-        "no-new-object": "error"
+        "func-names": "off"
     }
 }
