@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm-run-all --parallel lint",
     "test": "mocha",
-    "lint": "./node_modules/.bin/eslint index.js"
+    "lint": "./node_modules/.bin/eslint *.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,11 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
     "prettier": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
   }
 }
