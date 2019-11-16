@@ -4,9 +4,9 @@
   "description": "DevC api for challenge app",
   "main": "server.js",
   "scripts": {
-    "start": "npm-run-all --parallel lint",
+    "start": "npm-run-all --parallel lint test",
     "test": "mocha",
-    "lint": "./node_modules/.bin/eslint *.js"
+    "lint": "./node_modules/.bin/eslint *.js test/*.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,9 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "mocha": "^6.2.2",
     "nodemon": "^1.19.4",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "express": "^4.17.1",
