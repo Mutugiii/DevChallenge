@@ -1,33 +1,18 @@
 // Definition of dependencies
 const {
   Pool,
-  Client,
 } = require('pg');
 const express = require('express');
+const bodyParser = require('body-parser');
+
+const userRoutes = require('./routers/user');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
 
-// Database connections with both pool and string
-const connectionString = 'postgressql://devc:devc123@localhost:5432/devc';
-
-const pool = new Pool({
-  connectionString,
-});
-
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res);
-  pool.end();
-});
-
-const client = new Client({
-  connectionString,
-});
-
-client.connect();
-
-client.query('SELECT NOW()', (err, res) => {
-  console.log(err, res);
-  client.end();
-});
+app.use('/api/v1', userRoutes);
 
 module.exports = app;
