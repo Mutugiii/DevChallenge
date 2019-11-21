@@ -22,45 +22,38 @@ exports.login = (req, res, next) => {
             message: 'User not found',
           });
         } else {
-          const userRole = result.rows[0].role;
-          if (userRole !== 'Admin') {
-            res.status(400).json({
-              message: 'Forbidden Request',
-            });
-          } else {
-            const hash = result.rows[0].password;
-            const userId = result.rows[0].id;
-            const userEmail = result.rows[0].email;
-            bcrypt
-              .compare(password, hash)
-              .then((valid) => {
-                if (!valid) {
-                  res.status(401).json({
-                    error: new Error('Invalid password Entered'),
-                  });
-                }
-                const data = {
-                  userEmail,
-                  userId,
-                };
-                const token = jwt.sign({
-                  data,
-                },
-                'RANDOM_TOKEN_SECRET', {
-                  expiresIn: '24h',
+          const hash = result.rows[0].password;
+          const userId = result.rows[0].id;
+          const userEmail = result.rows[0].email;
+          bcrypt
+            .compare(password, hash)
+            .then((valid) => {
+              if (!valid) {
+                res.status(401).json({
+                  error: new Error('Invalid password Entered'),
                 });
-                res.status(200).json({
-                  userId: data,
-                  token,
-                  message: 'Successful Authentication',
-                });
-              })
-              .catch((error) => {
-                res.status(500).json({
-                  error,
-                });
+              }
+              const data = {
+                userEmail,
+                userId,
+              };
+              const token = jwt.sign({
+                data,
+              },
+              'RANDOM_TOKEN_SECRET', {
+                expiresIn: '24h',
               });
-          }
+              res.status(200).json({
+                userId: data,
+                token,
+                message: 'Successful Authentication',
+              });
+            })
+            .catch((error) => {
+              res.status(500).json({
+                error,
+              });
+            });
         }
       },
     );
