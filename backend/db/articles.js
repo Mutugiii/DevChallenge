@@ -15,23 +15,17 @@ pool.on('connect', () => {
   console.log('Connected to the db');
 });
 
-const createUserTable = () => {
-  const userTable = `
+const createArticleTable = () => {
+  const articleTable = `
   CREATE TABLE IF NOT EXISTS
-  users(
-    employeeId VARCHAR(30) PRIMARY KEY,
-    firstName VARCHAR(30) NOT NULL,
-    LastName VARCHAR(30) NOT NULL,
-    email VARCHAR(128) UNIQUE NOT NULL,
-    password VARCHAR(128) NOT NULL,
-    gender TEXT NOT NULL DEFAULT('Male'),
-    jobRole TEXT NOT NULL DEFAULT('Employee'),
-    department TEXT NOT NULL DEFAULT('General'),
-    address VARCHAR(30) NOT NULL
+  articles(
+    title VARCHAR(30) PRIMARY KEY,
+    articleContent VARCHAR(30) NOT NULL,
+    context TEXT NOT NULL DEFAULT('General')
   )`;
 
   pool
-    .query(userTable)
+    .query(articleTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -42,10 +36,10 @@ const createUserTable = () => {
     });
 };
 
-const dropUserTable = () => {
-  const userTable = 'DROP TABLE IF EXISTS users';
+const dropArticleTable = () => {
+  const articleTable = 'DROP TABLE IF EXISTS articles';
   pool
-    .query(userTable)
+    .query(articleTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -55,15 +49,10 @@ const dropUserTable = () => {
       pool.end();
     });
 };
-
-// pool.on('remove', () => {
-//   console.log('Client Removed');
-//   process.exit(0);
-// });
 
 module.exports = {
-  createUserTable,
-  dropUserTable,
+  createArticleTable,
+  dropArticleTable,
   pool,
 };
 
