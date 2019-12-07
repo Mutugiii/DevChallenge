@@ -33,20 +33,21 @@ exports.login = (req, res, next) => {
                   error: new Error('Invalid password Entered'),
                 });
               }
-              const data = {
-                userEmail,
+              const userData = {
                 userId,
               };
               const token = jwt.sign({
-                data,
+                userData,
               },
               'RANDOM_TOKEN_SECRET', {
                 expiresIn: '24h',
               });
               res.status(200).json({
-                userId: data,
-                token,
-                message: 'Successful Authentication',
+                status: 'Success',
+                data: {
+                  token,
+                  userId: userData,
+                },
               });
             })
             .catch((error) => {

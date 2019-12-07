@@ -10,13 +10,21 @@ exports.signup = (req, res, next) => {
     .hash(req.body.password, 10)
     .then((hash) => {
       const data = {
-        name: req.body.name,
+        employeeId: req.body.employeeId,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hash,
+        gender: req.body.gender,
+        jobRole: req.body.jobRole,
+        department: req.body.department,
+        address: req.body.address,
       };
       pool.connect((err, client) => {
-        const query = 'INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING *';
-        const values = [data.name, data.email, data.password];
+        const query = 'INSERT INTO users(employeeId, firstName, lastName, email, password, gender, jobRole, department, address) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *';
+        const values = [data.employeeId, data.firstName, data.lastName,
+          data.email, data.password, data.gender, data.jobRole, data.department, data.address,
+        ];
 
         client.query(query, values).then((result) => {
           res
